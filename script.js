@@ -28,20 +28,20 @@ const countObs=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)
 
 // Tool wall — real brand marks where they exist, plus purpose-built field icons for non-brand categories.
 const tools=[
-{name:'Windows',short:'WIN',slug:'microsoftwindows',kind:'OS / ENDPOINT',color:'0078D4',desc:'Instalasi, konfigurasi, maintenance, dan troubleshooting perangkat Windows.',brand:true},
+{name:'Windows',short:'WIN',icon:'windows',kind:'OS / ENDPOINT',color:'0078D4',desc:'Instalasi, konfigurasi, maintenance, dan troubleshooting perangkat Windows.',brand:false},
 {name:'MikroTik',short:'MT',slug:'mikrotik',kind:'NETWORK',color:'293239',desc:'Router, gateway, routing, bandwidth policy, NAT, LAN/Wi-Fi, dan troubleshooting.',brand:true},
 {name:'Cisco',short:'C',slug:'cisco',kind:'NETWORK',color:'1BA0D7',desc:'Konsep switching, VLAN, trunking, interface status, dan network flow.',brand:true},
 {name:'Ubiquiti',short:'UI',slug:'ubiquiti',kind:'WIRELESS',color:'0559C9',desc:'Reference ecosystem untuk wireless dan network access point.',brand:true},
 {name:'SAP',short:'SAP',slug:'sap',kind:'ERP / SYSTEMS',color:'0FAAFF',desc:'Support pengguna, pengecekan data, dan penyelesaian kendala operasional SAP.',brand:true},
 {name:'Synology',short:'SY',slug:'synology',kind:'STORAGE',color:'B5B5B5',desc:'Monitoring dan support Synology NAS di lingkungan operasional.',brand:true},
 {name:'Wireshark',short:'WS',slug:'wireshark',kind:'NETWORK ANALYSIS',color:'1679A7',desc:'Packet inspection dan analisis konektivitas jaringan.',brand:true},
-{name:'PuTTY',short:'PT',slug:'putty',kind:'REMOTE / CLI',color:'F9D14C',desc:'Remote terminal utility untuk akses perangkat jaringan.',brand:true},
+{name:'PuTTY',short:'PT',icon:'putty',kind:'REMOTE / CLI',color:'F9D14C',desc:'Remote terminal utility untuk akses perangkat jaringan.',brand:false},
 {name:'VS Code',short:'VS',slug:'visualstudiocode',kind:'DEV / DOCS',color:'23A8F2',desc:'Editor untuk dokumentasi, scripting, dan development support.',brand:true},
 {name:'Git',short:'GIT',slug:'git',kind:'VERSIONING',color:'F05032',desc:'Version control untuk dokumentasi dan project teknis.',brand:true},
 {name:'Linux',short:'LNX',slug:'linux',kind:'OS / SERVER',color:'FCC624',desc:'Lingkungan OS dan command-line concepts untuk troubleshooting.',brand:true},
 {name:'Postman',short:'PM',slug:'postman',kind:'API / TEST',color:'FF6C37',desc:'API utility untuk test endpoint dan kebutuhan integrasi.',brand:true},
 {name:'Python',short:'PY',slug:'python',kind:'SCRIPTING',color:'3776AB',desc:'Scripting untuk automasi ringan dan problem solving.',brand:true},
-{name:'Java',short:'JAVA',slug:'java',kind:'PROGRAMMING',color:'ED8B00',desc:'Pengalaman pengembangan aplikasi saat project coding.',brand:true},
+{name:'Java',short:'JAVA',icon:'java',kind:'PROGRAMMING',color:'ED8B00',desc:'Pengalaman pengembangan aplikasi saat project coding.',brand:false},
 {name:'C++',short:'C++',slug:'cplusplus',kind:'PROGRAMMING',color:'00599C',desc:'Pengalaman pengembangan aplikasi saat project coding.',brand:true},
 {name:'Claude',short:'AI',slug:'claude',kind:'AI / PRODUCTIVITY',color:'D97757',desc:'AI fluency dan workflow assistance pada aktivitas belajar/kerja.',brand:true},
 {name:'Microsoft 365',short:'365',slug:'microsoft365',kind:'PRODUCTIVITY',color:'5E5CE6',desc:'Dokumen, user productivity, dan support operasional.',brand:true},
@@ -56,7 +56,10 @@ const toolIcons={
  lock:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="1.8"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15" r="1"/></svg>',
  printer:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 9V4h10v5"/><rect x="4" y="9" width="16" height="8" rx="2"/><path d="M7 14h10v6H7z"/><circle cx="17" cy="12" r="1"/></svg>',
  wifi:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 9.5a13 13 0 0 1 17 0"/><path d="M6.5 12.5a8.5 8.5 0 0 1 11 0"/><path d="M9.5 15.5a4 4 0 0 1 5 0"/><circle cx="12" cy="18.5" r=".9" fill="currentColor" stroke="none"/></svg>',
- ethernet:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3v5M12 3v5M16 3v5"/><path d="M5 8h14v4a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3z"/><path d="M12 15v6"/></svg>'
+ ethernet:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3v5M12 3v5M16 3v5"/><path d="M5 8h14v4a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3z"/><path d="M12 15v6"/></svg>',
+ windows:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx=".5"/><rect x="13" y="3" width="8" height="8" rx=".5"/><rect x="3" y="13" width="8" height="8" rx=".5"/><rect x="13" y="13" width="8" height="8" rx=".5"/></svg>',
+ java:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9h11v6a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4Z"/><path d="M16 10h1.5a2.5 2.5 0 0 1 0 5H16"/><path d="M8 6c-.5-1 .5-1.4 0-2.4M12 6c-.5-1 .5-1.4 0-2.4"/></svg>',
+ putty:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="1.5"/><path d="m7 9.2 3 2.3-3 2.3M12.5 14h4.5"/><path d="M9 20h6M12 17v3"/></svg>'
 };
 const toolWall=$('#toolWall'), detailTitle=$('#detailTitle'), detailText=$('#detailText'), detailIcon=$('#detailIcon');
 function toolVisual(t,detail=false){
