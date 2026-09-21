@@ -1,6 +1,4 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#0b1621"/>
-  <rect width="64" height="64" rx="14" fill="none" stroke="#1c3441" stroke-width="1.5"/>
-  <text x="11" y="45" font-family="Space Grotesk, Arial, Helvetica, sans-serif" font-weight="700" font-size="33" letter-spacing="-1" fill="#e8f0f4">h</text>
-  <text x="34" y="45" font-family="Space Grotesk, Arial, Helvetica, sans-serif" font-weight="700" font-size="33" fill="#71e2f3">/</text>
+  <rect width="64" height="64" rx="16" fill="#131316"/>
+  <text x="32" y="42" font-family="Manrope, Arial, Helvetica, sans-serif" font-weight="800" font-size="24" letter-spacing="-1" fill="#e2a344" text-anchor="middle">MH</text>
 </svg>
