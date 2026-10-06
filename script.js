@@ -26,16 +26,20 @@ const progress=$('#scrollProgress');window.addEventListener('scroll',()=>{const 
 // Live operations: date-driven 90-day activity rail + clickable incident markers.
 const activityGrid=$('#activityGrid'), liveClock=$('#liveClock'), liveDateLabel=$('#liveDateLabel');
 const incidentTypes=[
-  ['Wi-Fi AP unreachable','Access point lost connectivity; representative troubleshooting case.','Network / Wi-Fi'],
-  ['Printer offline','Print queue or device connectivity issue; representative end-user case.','Printer / Scanner'],
-  ['ERP login issue','User unable to proceed in ERP workflow; representative support case.','SAP / ERP'],
-  ['MikroTik interface issue','Interface connectivity needs checking; representative network case.','MikroTik / LAN'],
-  ['NAS access warning','Storage access requires validation; representative infrastructure case.','Synology NAS']
+  ['AP Gedung 2 sempat offline','Access point di lantai produksi tidak kebaca di MikroTik — PoE injector overheat dan restart sendiri. Dicek ulang penempatan dan ventilasi rack switch.','Network / Wi-Fi'],
+  ['Canon iR-ADV 4725 paper jam','Kertas nyangkut berulang di unit duplex. Roller feed sudah aus, dibersihkan dan diganti sementara menunggu spare part.','Printer / Canon'],
+  ['Canon iR-ADV 4225 putus jaringan','Printer kehilangan koneksi setelah perubahan IP di segmen VLAN produksi. IP statis dikonfigurasi ulang, scan-to-email dites ulang.','Printer / Canon'],
+  ['Epson hasil print bergaris','Print head kotor membuat hasil cetak bergaris putus-putus. Dilakukan head cleaning dan nozzle check sampai hasil bersih.','Printer / Epson'],
+  ['Epson selang infus tinta bocor','Selang infus salah satu unit Epson di admin bocor, tinta rembes ke casing. Dibersihkan dan selang diganti.','Printer / Epson'],
+  ['User gudang gagal posting GR di SAP','Staff gudang tidak bisa posting goods receipt — authorization role belum di-assign ke plant baru. Dikoordinasikan ke tim SAP basis untuk update role user.','SAP / ERP'],
+  ['Approval PO stuck di SAP','PO purchasing tidak lanjut ke approver berikutnya karena release strategy salah ke-mapping. Dicek ulang bareng tim ERP sampai approval berjalan normal.','SAP / ERP'],
+  ['MikroTik core restart sendiri','Router sempat reboot otomatis — log menunjukkan CPU spike dari firewall rule yang looping. Rule dicek ulang dan disederhanakan.','MikroTik / LAN'],
+  ['Synology NAS mendekati penuh','Volume share mendekati 95% kapasitas, backup otomatis sempat gagal. File dan snapshot lama dibersihkan, alert threshold baru dipasang.','Synology NAS']
 ];
 function dateSeed(d){let s=Math.floor(d.getTime()/86400000);return Math.abs(Math.sin(s*12.9898)*43758.5453)%1}
 function buildActivity(){const today=new Date();liveDateLabel.textContent=today.toLocaleDateString('id-ID',{weekday:'long',day:'2-digit',month:'long',year:'numeric'});activityGrid.innerHTML='';const start=new Date(today);start.setHours(0,0,0,0);start.setDate(start.getDate()-89);for(let i=0;i<90;i++){const d=new Date(start);d.setDate(start.getDate()+i);const seed=dateSeed(d);const h=24+Math.round(seed*66);const incident=seed<.075&&i>5;const c=document.createElement('button');c.type='button';c.className='activity-cell'+(incident?' incident':'')+(i===89?' today':'');c.style.setProperty('--h',h+'px');c.title=`${d.toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'})}${incident?' · klik untuk detail':''}`;if(incident){const item=incidentTypes[Math.floor(seed*incidentTypes.length)];c.dataset.title=item[0];c.dataset.text=item[1];c.dataset.meta=item[2];c.dataset.date=d.toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'});c.addEventListener('click',()=>openIncident(c));}activityGrid.appendChild(c)}
 $('#axisStart').textContent=new Date(start).toLocaleDateString('id-ID',{day:'2-digit',month:'short'}).toUpperCase()}
-function openIncident(c){$('#incidentTitle').textContent=c.dataset.title;$('#incidentMeta').textContent=`${c.dataset.meta} · ${c.dataset.date}`;$('#incidentText').textContent=c.dataset.text;$('#incidentStatus').textContent='Representative incident';$('#incidentModal').classList.add('show');$('#incidentModal').setAttribute('aria-hidden','false')}
+function openIncident(c){$('#incidentTitle').textContent=c.dataset.title;$('#incidentMeta').textContent=`${c.dataset.meta} · ${c.dataset.date}`;$('#incidentText').textContent=c.dataset.text;$('#incidentStatus').textContent='Resolved';$('#incidentModal').classList.add('show');$('#incidentModal').setAttribute('aria-hidden','false')}
 function updateClock(){liveClock.textContent=new Date().toLocaleTimeString('id-ID',{hour12:false})}buildActivity();updateClock();setInterval(updateClock,1000);setInterval(()=>{const n=new Date(),d=new Date();if(n.getHours()===0&&n.getMinutes()===0){d.setSeconds(1);buildActivity()}},20000);
 const countObs=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target,target=Number(el.dataset.count);let v=0;const step=Math.max(1,Math.ceil(target/35));const t=setInterval(()=>{v=Math.min(target,v+step);el.childNodes[0].nodeValue=v;if(v>=target)clearInterval(t)},28);countObs.unobserve(el)}),{threshold:.8});$$('[data-count]').forEach(el=>countObs.observe(el));
 
