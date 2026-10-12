@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=3">
 <script>try{var t=localStorage.getItem('hz-theme')||'light';document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
 </head>
 <body>
@@ -72,7 +72,7 @@
     <div class="live-top"><div><strong>Operational activity rail</strong><span id="liveDateLabel">--</span></div><div class="live-badge"><i></i> LIVE / TODAY</div></div>
     <div class="activity-wrap"><div class="activity-grid" id="activityGrid"></div></div>
     <div class="activity-axis"><span id="axisStart">90 DAYS AGO</span><span>DAY BY DAY</span><span>TODAY</span></div>
-    <div class="activity-legend"><span><i class="dot-normal"></i>Normal activity</span><span><i class="dot-incident"></i>Incident</span></div>
+    <div class="activity-legend"><span><i class="dot-normal"></i>Normal activity</span><span><i class="dot-incident"></i>Incident</span><span><i class="dot-event"></i>Project / planned</span></div>
     <div class="metric-row">
       <div class="metric"><small>SUPPORTED DEVICES</small><strong data-count="200">0<span>+</span></strong><span>preventive maintenance scope</span></div>
       <div class="metric"><small>DAILY RESOLUTION</small><strong data-count="95">0<span>%</span></strong><span>technical issues reported in CV</span></div>
@@ -107,6 +107,7 @@
     <article class="work-card task-card" data-cat="maintenance"><div class="work-meta"><span>12 / MAINTENANCE</span><span>CLEANING</span></div><h3>Cleaning<br>Laptop</h3><p>Pembersihan menyeluruh bagian dalam laptop — fan, heatsink, dan komponen dari debu untuk mencegah overheat.</p><button class="work-action" data-detail="cleaning">Open workstream ↗</button></article>
     <article class="work-card task-card" data-cat="maintenance"><div class="work-meta"><span>13 / MAINTENANCE</span><span>RAM</span></div><h3>Ganti RAM</h3><p>Upgrade/penggantian RAM pada PC/laptop untuk peningkatan performa.</p><button class="work-action" data-detail="ram">Open workstream ↗</button></article>
     <article class="work-card task-card" data-cat="project"><div class="work-meta"><span>14 / PROJECT</span><span>HOME LAB</span></div><h3>Mini Server (STB)<br>Home Lab</h3><p>Project pribadi root mini server rumahan menggunakan perangkat STB bekas untuk kebutuhan home lab.</p><button class="work-action" data-detail="stb">Open workstream ↗</button></article>
+    <article class="work-card task-card" data-cat="project"><div class="work-meta"><span>15 / PROJECT</span><span>RELOCATION</span></div><h3>Server Room<br>Relocation</h3><p>Relokasi ruang server dengan downtime terencana — seluruh server dan jaringan dimatikan sementara, sampai layanan kembali normal.</p><button class="work-action" data-detail="relocation">Open workstream ↗</button></article>
   </div>
 </section>
 
@@ -305,6 +306,6 @@
 <div class="modal" id="incidentModal" aria-hidden="true"><div class="modal-backdrop" data-close-modal></div><div class="modal-card"><button class="modal-close" data-close-modal>×</button><small>INCIDENT DETAIL</small><h3 id="incidentTitle">Network incident</h3><div class="incident-meta" id="incidentMeta"></div><p id="incidentText"></p><div class="incident-status"><span></span><strong id="incidentStatus">Resolved</strong></div></div></div>
 <div class="modal" id="credentialModal" aria-hidden="true"><div class="modal-backdrop" data-close-modal></div><div class="modal-card cred-modal-card"><button class="modal-close" data-close-modal>×</button><small>CREDENTIAL</small><h3 id="credentialTitle">Certificate</h3><img id="credentialImage" class="cred-modal-image" alt="Certificate image"><p id="credentialText" style="white-space:pre-line"></p><div class="modal-actions"><a id="credentialOpen" class="btn primary" target="_blank" rel="noreferrer">Open credential</a></div></div></div>
 <div class="toast" id="toast"></div>
-<script src="script.js"></script>
+<script src="script.js?v=3"></script>
 </body>
 </html>
